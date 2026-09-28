@@ -529,8 +529,12 @@ def iniciar_overlay_envio(fila):
 
         intent = Intent()
 
+        pacote = str(
+            activity.getPackageName()
+        )
+
         intent.setClassName(
-            activity,
+            pacote,
             "com.croger.discipuladorcristaov2.OverlayService"
         )
 
