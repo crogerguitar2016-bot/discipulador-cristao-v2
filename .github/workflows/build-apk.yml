@@ -56,58 +56,7 @@ jobs:
 
       - name: Habilitar XML dentro do application
         run: |
-          python - <<'PYFIX'
-          from pathlib import Path
-          import buildozer.targets.android as android_target
-
-          p = Path(android_target.__file__)
-          texto = p.read_text(encoding="utf-8")
-
-          if "--extra-manifest-application-xml" not in texto:
-
-              marcador = (
-                  "        # support for extra-manifest-application-arguments\n"
-              )
-
-              bloco = """        # support for extra-manifest-application-xml
-        extra_manifest_application_xml = self.buildozer.config.get(
-            'app', 'android.extra_manifest_application_xml', fallback='')
-        if extra_manifest_application_xml:
-            cmd.append('--extra-manifest-application-xml')
-            cmd.append('{}'.format(
-                open(extra_manifest_application_xml, 'rt').read()
-            ))
-
-"""
-
-              if marcador not in texto:
-                  raise SystemExit(
-                      "Nao encontrei o ponto de patch do Buildozer"
-                  )
-
-              texto = texto.replace(
-                  marcador,
-                  bloco + marcador,
-                  1
-              )
-
-              p.write_text(
-                  texto,
-                  encoding="utf-8"
-              )
-
-          final = p.read_text(encoding="utf-8")
-
-          if "--extra-manifest-application-xml" not in final:
-              raise SystemExit(
-                  "Falha ao habilitar application XML"
-              )
-
-          print(
-              "OK - Buildozer preparado para "
-              "--extra-manifest-application-xml"
-          )
-          PYFIX
+          python ci/patch_buildozer.py
 
       - name: Instalar Android SDK
         run: |

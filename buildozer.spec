@@ -9,7 +9,7 @@ source.dir = .
 
 source.include_exts = py,png,jpg,jpeg,kv,atlas,txt,json,java,xml
 
-source.exclude_dirs = .git,.buildozer,bin,__pycache__
+source.exclude_dirs = .git,.buildozer,bin,__pycache__,ci,.github
 
 version = 1.0.0
 
