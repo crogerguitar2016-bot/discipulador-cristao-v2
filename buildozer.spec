@@ -38,7 +38,7 @@ android.permissions = READ_CONTACTS,SYSTEM_ALERT_WINDOW
 android.accept_sdk_license = True
 
 android.add_src = android_src
-android.extra_manifest_application_arguments = android_res/extra_application.xml
+android.extra_manifest_application_xml = android_res/extra_application.xml
 
 p4a.branch = develop
 p4a.source_dir = /home/runner/p4a
